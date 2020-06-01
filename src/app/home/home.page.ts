@@ -11,6 +11,8 @@ import { Booking } from '../models/booking';
 })
 export class HomePage {
   list: Booking[] = [];
+  realList: Booking[] = [];
+  filtro: string = "";
 
   constructor(private storage: StorageService, private homeService: HomeService) {}
 
@@ -26,13 +28,36 @@ export class HomePage {
           book.locationId.streetAddress,book.bookingPrice))
         
       });
+      this.realList = this.list
     })
     
   }
 
-  sortBy(prop: string) {
-    this.list = this.list.sort((a, b) => a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1);
-    console.log(this.list.sort((a, b) => a[prop] > b[prop] ? 1 : a[prop] === b[prop] ? 0 : -1))
-    return this.list;
+  filterBy() {
+    this.list = this.realList.filter( item =>{ 
+      if (item.bookingId.toString().includes(this.filtro) 
+      || item.bookingPrice.toString().includes(this.filtro))
+        return item})
+  }
+  sortIdBy(type){
+    if ( type == "a"){
+      this.list = this.realList.sort((a, b) => 
+        parseFloat(a.bookingId) - parseFloat(b.bookingId));
+    }
+    else {
+      this.list = this.realList.sort((a, b) => 
+        parseFloat(b.bookingId) - parseFloat(a.bookingId));
+    }
+  }
+
+  sortPriceBy(type){
+    if ( type == "a"){
+      this.list = this.realList.sort((a, b) => 
+        a.bookingPrice - b.bookingPrice);
+    }
+    else {
+      this.list = this.realList.sort((a, b) => 
+        b.bookingPrice - a.bookingPrice);
+    }
   }
 }

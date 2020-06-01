@@ -5,23 +5,62 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <div padding>
-    <button ion-button block (click)="sortBy('bookingId')">Filtrar</button>
-  </div>
-  <ion-list>
-
-    <ion-item *ngFor="let item of sortBy(null)">
-      <ion-avatar slot="start">
-        <img src="assets/icon/favicon.png">
-      </ion-avatar>
-      <ion-label>
-        <p>{{item.clientName}}</p>
-        <p>{{item.bookingId}}</p>
-        <p>{{item.bookingTime}}</p>
-        <p>{{item.bookingPrice}}</p>
-        <p>{{item.streetAddres}}</p>
-      </ion-label>
-    </ion-item>
-
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label fixed>Introduzca la busqueda: </ion-label>
+        <ion-input type="text" [(ngModel)]="filtro"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <div padding>
+      <ion-button block shape="round" color="primary" (click)="filterBy()">Filtrar</ion-button>
+    </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-grid>
+      Ordenar por id de forma
+      <ion-col>
+        <div padding>
+          <ion-button block size="small" color="light" (click)="sortIdBy('a')">Ascendente</ion-button>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div padding>
+          <ion-button block size="small" color="light" (click)="sortIdBy('d')">Descendesnte</ion-button>
+        </div>
+      </ion-col>
+    </ion-grid>
+    <ion-grid>
+      Ordenar por precio de forma
+      <ion-col>
+        <div padding>
+        <ion-button block size="small" color="light" (click)="sortPriceBy('a')">Ascendente</ion-button>
+      </div>
+      </ion-col>
+      <ion-col>
+        <div padding>
+        <ion-button block size="small" color="light" (click)="sortPriceBy('d')">Descendente</ion-button>
+      </div>
+      </ion-col>
+    </ion-grid>
+  </ion-row>
+    
+    <ion-list>
+      <ion-grid>
+      <ion-item *ngFor="let item of list">
+        <ion-avatar slot="start">
+          <img src="assets/icon/favicon.png">
+        </ion-avatar>
+        <ion-label>
+          <p>{{item.clientName}}</p>
+          <p>{{item.bookingId}}</p>
+          <p>{{item.bookingTime}}</p>
+          <p>{{item.bookingPrice}}</p>
+          <p>{{item.streetAddres}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-grid>
   </ion-list>
 </ion-content>
