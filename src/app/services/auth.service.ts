@@ -3,18 +3,13 @@ import { appKey } from '../const/key';
 import { Observable, throwError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { APIPath, loginPath } from '../const/path';
-import { User } from '../models/user.model';
+import { userPath } from '../const/path';
 import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  headers = {
-    App: appKey,
-    Accept: 'aplication/json'
-  };
   constructor(private httpClient: HttpClient, public alertController: AlertController) { 
     
   }
@@ -50,14 +45,15 @@ export class AuthService {
     await alert.present();
   }
   
-  login(email: string, password: string): Observable<User> {
+  login(email: string, password: string): Observable<any> {
     const headers = {
       headers: new HttpHeaders({
-        ...this.headers,
+        App: appKey,
+        Accept: 'aplication/json',
         Password: password,
       }),
     }
-    return this.httpClient.put<any>(loginPath + '/' + email,{}, headers)
+    return this.httpClient.put<any>(userPath + '/' + email,{}, headers)
     .pipe(
       catchError(this.handleError.bind(this))
     )

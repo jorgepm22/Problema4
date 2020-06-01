@@ -1,20 +1,27 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>List</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content fullscreen>
+  <div padding>
+    <button ion-button block (click)="sortBy('bookingId')">Filtrar</button>
   </div>
+  <ion-list>
+
+    <ion-item *ngFor="let item of sortBy(null)">
+      <ion-avatar slot="start">
+        <img src="assets/icon/favicon.png">
+      </ion-avatar>
+      <ion-label>
+        <p>{{item.clientName}}</p>
+        <p>{{item.bookingId}}</p>
+        <p>{{item.bookingTime}}</p>
+        <p>{{item.bookingPrice}}</p>
+        <p>{{item.streetAddres}}</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
 </ion-content>

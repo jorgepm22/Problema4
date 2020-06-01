@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,10 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+driverOrder: ['indexeddb', 'sqlite', 'websql']
+    }),
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
